@@ -1,5 +1,5 @@
 # Проект бургерной
-
+сайт можно посмотреть по ссылке: https://kasstel.github.io/burger-shop/
 **React-приложение для заказа бургеров с интерактивным конструктором**
 
 [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
