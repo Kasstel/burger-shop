@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import styles from './app-header.module.css';
+import logo from '../../../images/logo.png';
 import { TAppHeaderUIProps } from './type';
 import {
   BurgerIcon,
@@ -43,7 +44,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
         </div>
 
         <div className={styles.logo}>
-          <Logo className='' />
+          <img src={logo} />
         </div>
 
         <div className={styles.link_position_last}>

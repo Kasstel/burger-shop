@@ -1,0 +1,274 @@
+{
+  "generatedAt": "2026-05-02T17:55:01.378Z",
+  "components": [
+    {
+      "name": "ConstructorPage",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/pages/constructor-page/constructor-page.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "../../services/store",
+        "./constructor-page.module.css",
+        "../../components",
+        "../../components",
+        "../../components/ui",
+        "react",
+        "react-redux"
+      ],
+      "hooks": [
+        {
+          "name": "useSelector",
+          "line": 15
+        }
+      ],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "Feed",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/pages/feed/feed.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "@ui",
+        "@ui-pages",
+        "@utils-types",
+        "react",
+        "../../services/store",
+        "../../slices/orderSlice"
+      ],
+      "hooks": [
+        {
+          "name": "useDispatch",
+          "line": 9
+        },
+        {
+          "name": "useSelector",
+          "line": 10
+        },
+        {
+          "name": "useEffect",
+          "line": 11
+        }
+      ],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "ForgotPassword",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/pages/forgot-password/forgot-password.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "react-router-dom",
+        "@api",
+        "@ui-pages"
+      ],
+      "hooks": [
+        {
+          "name": "useState",
+          "line": 8
+        },
+        {
+          "name": "useState",
+          "line": 9
+        },
+        {
+          "name": "useNavigate",
+          "line": 11
+        }
+      ],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "Login",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/pages/login/login.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "@ui-pages",
+        "../../services/store",
+        "../../slices/authSlice",
+        "react-router-dom"
+      ],
+      "hooks": [
+        {
+          "name": "useDispatch",
+          "line": 8
+        },
+        {
+          "name": "useNavigate",
+          "line": 9
+        },
+        {
+          "name": "useState",
+          "line": 10
+        },
+        {
+          "name": "useState",
+          "line": 11
+        }
+      ],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "NotFound404",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/pages/not-fount-404/not-fount-404.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "react"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "Profile",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/pages/profile/profile.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "@ui-pages",
+        "react",
+        "../../services/store",
+        "../../slices/authSlice"
+      ],
+      "hooks": [
+        {
+          "name": "useSelector",
+          "line": 7
+        },
+        {
+          "name": "useDispatch",
+          "line": 8
+        },
+        {
+          "name": "useState",
+          "line": 10
+        },
+        {
+          "name": "useEffect",
+          "line": 16
+        }
+      ],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "ProfileOrders",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/pages/profile-orders/profile-orders.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "@ui-pages",
+        "@utils-types",
+        "react",
+        "../../services/store",
+        "../../slices/orderSlice"
+      ],
+      "hooks": [
+        {
+          "name": "useDispatch",
+          "line": 8
+        },
+        {
+          "name": "useSelector",
+          "line": 9
+        },
+        {
+          "name": "useEffect",
+          "line": 11
+        }
+      ],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "Register",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/pages/register/register.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "@ui-pages",
+        "../../services/store",
+        "../../slices/authSlice",
+        "react-router-dom"
+      ],
+      "hooks": [
+        {
+          "name": "useNavigate",
+          "line": 8
+        },
+        {
+          "name": "useDispatch",
+          "line": 9
+        },
+        {
+          "name": "useState",
+          "line": 10
+        },
+        {
+          "name": "useState",
+          "line": 11
+        },
+        {
+          "name": "useState",
+          "line": 12
+        }
+      ],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "ResetPassword",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/pages/reset-password/reset-password.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "react-router-dom",
+        "@api",
+        "@ui-pages"
+      ],
+      "hooks": [
+        {
+          "name": "useNavigate",
+          "line": 8
+        },
+        {
+          "name": "useState",
+          "line": 9
+        },
+        {
+          "name": "useState",
+          "line": 10
+        },
+        {
+          "name": "useState",
+          "line": 11
+        },
+        {
+          "name": "useEffect",
+          "line": 24
+        }
+      ],
+      "isExported": true,
+      "exportType": "named"
+    }
+  ]
+}
