@@ -13,6 +13,7 @@ import { CartUIProps } from './type';
 import { TDeliveryType } from '@utils-types';
 import { Modal } from '@components';
 import { Currency } from '../../currency';
+import { SHOP_ADDRESS } from '../../../../data/shop';
 import { OrderDetailsUI } from '../../order-details';
 import { Preloader } from '../../preloader';
 
@@ -154,8 +155,8 @@ export const CartUI: FC<CartUIProps> = ({
             </>
           ) : (
             <p className='text text_type_main-default text_color_inactive pb-6'>
-              Заберите заказ на выдаче, когда он будет готов. Назовите номер
-              заказа.
+              Заберите заказ по адресу: {SHOP_ADDRESS}. Назовите номер заказа на
+              выдаче.
             </p>
           )}
           <div className='pb-2'>

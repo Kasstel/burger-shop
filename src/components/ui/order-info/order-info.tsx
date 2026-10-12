@@ -6,6 +6,7 @@ import styles from './order-info.module.css';
 import { OrderInfoUIProps } from './type';
 import { OrderProgress } from '@components';
 import { Currency } from '../currency';
+import { SHOP_ADDRESS } from '../../../data/shop';
 
 export const OrderInfoUI: FC<OrderInfoUIProps> = memo(({ orderInfo }) => {
   const { delivery, comment } = orderInfo;
@@ -14,7 +15,7 @@ export const OrderInfoUI: FC<OrderInfoUIProps> = memo(({ orderInfo }) => {
       ? ['Доставка', delivery.address, delivery.phone]
           .filter(Boolean)
           .join(', ')
-      : 'Самовывоз';
+      : `Самовывоз: ${SHOP_ADDRESS}`;
 
   return (
     <div className={styles.wrap}>

@@ -58,7 +58,7 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
 
         <Link to='/' className={styles.logo}>
           <img src={logo} alt='' />
-          <span className='text text_type_main-medium ml-3'>Burger Shop</span>
+          <span className='text text_type_main-medium ml-3'>Cosmo Burgers</span>
         </Link>
 
         <div className={styles.link_position_last}>
