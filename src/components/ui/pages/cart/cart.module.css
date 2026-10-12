@@ -137,3 +137,88 @@
 .hint {
   font-size: 14px;
 }
+
+@media (max-width: 768px) {
+  .containerMain {
+    overflow: visible;
+    padding: 0 16px 32px;
+  }
+
+  .containerMain h1 {
+    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+
+  .main {
+    flex-direction: column;
+    gap: 24px;
+    height: auto;
+    overflow: visible;
+  }
+
+  .list,
+  .form {
+    flex: none;
+    overflow-y: visible;
+  }
+
+  li.item {
+    position: relative;
+    gap: 12px;
+    margin-right: 0;
+    padding: 16px;
+  }
+
+  .img_wrap {
+    width: 56px;
+    height: 56px;
+  }
+
+  .img {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* крестик уходит в угол карточки, чтобы не сужать строку с количеством и ценой */
+  .remove {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+  .info h2 {
+    padding-right: 36px;
+    font-size: 20px;
+    overflow-wrap: anywhere;
+  }
+
+  .controls {
+    gap: 12px;
+  }
+
+  .tabs > div {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-right: 4px;
+    padding-left: 4px;
+  }
+
+  .total {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .total .cost {
+    margin-right: 0;
+  }
+
+  .total button {
+    flex-grow: 1;
+  }
+
+  .empty {
+    margin-top: 40px;
+    text-align: center;
+  }
+}

@@ -75,3 +75,42 @@
 .total {
   margin-left: auto;
 }
+
+@media (max-width: 768px) {
+  .wrap {
+    width: 100%;
+  }
+
+  li.item {
+    padding-right: 8px;
+  }
+
+  .img_wrap {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+  }
+
+  .border {
+    width: 44px;
+    height: 44px;
+  }
+
+  .img {
+    right: 20px;
+    width: 84px;
+    height: 42px;
+  }
+
+  .img_wrap + span {
+    padding-left: 12px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .item .quantity {
+    padding-right: 8px;
+    padding-left: 8px;
+    white-space: nowrap;
+  }
+}

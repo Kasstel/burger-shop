@@ -13,3 +13,32 @@
 .orders {
   width: 100%;
 }
+
+@media (max-width: 768px) {
+  .main {
+    box-sizing: border-box;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    padding: 0 16px 32px;
+  }
+
+  /* пункты меню профиля встают в строку над списком заказов */
+  div.menu {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    width: 100%;
+    margin: 24px 0 0;
+  }
+
+  .menu > p {
+    flex-basis: 100%;
+    padding-top: 8px;
+  }
+
+  div.orders {
+    margin-top: 16px;
+  }
+}

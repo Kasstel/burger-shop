@@ -28,3 +28,23 @@
   height: 240px;
   object-fit: contain;
 }
+
+@media (max-width: 768px) {
+  .content {
+    width: 100%;
+    margin: 0;
+  }
+
+  .img {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    aspect-ratio: 2 / 1;
+  }
+
+  .nutritional_values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 8px;
+  }
+}

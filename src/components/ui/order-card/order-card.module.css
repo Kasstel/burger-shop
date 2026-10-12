@@ -65,3 +65,59 @@
   top: 50%;
   transform: translate(-50%, -50%);
 }
+
+@media (max-width: 768px) {
+  a.order {
+    min-width: 0;
+    margin-right: 0;
+    padding: 16px;
+    border-radius: 24px;
+  }
+
+  .order_info {
+    flex-wrap: wrap;
+    gap: 4px 12px;
+  }
+
+  h4.order_name {
+    padding-top: 16px;
+    font-size: 20px;
+  }
+
+  div.order_content {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 16px;
+  }
+
+  .order_content > div {
+    flex-shrink: 0;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* сдвиг кружков задан в разметке через right, здесь он заменён отрицательным отступом */
+  li.img_wrap {
+    right: 0 !important;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    margin-left: -18px;
+  }
+
+  li.img_wrap:first-child {
+    margin-left: 0;
+  }
+
+  .img {
+    right: 20px;
+    width: 84px;
+    height: 42px;
+  }
+
+  /* видимая часть последнего кружка смещена вправо, счётчик — вместе с ней */
+  .remains {
+    left: 68%;
+    font-size: 24px;
+  }
+}

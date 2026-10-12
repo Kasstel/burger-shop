@@ -46,3 +46,27 @@
   color: #ff0000;
   text-align: center;
 }
+
+@media (max-width: 768px) {
+  .container {
+    box-sizing: border-box;
+    flex-direction: column;
+    flex-grow: 1;
+    height: auto;
+    padding: 0 16px 32px;
+  }
+
+  .wrapCenter {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .question {
+    text-align: center;
+  }
+
+  /* иначе иконка в поле забирает половину ширины у текста */
+  .form :global(.input__icon) {
+    width: auto;
+  }
+}

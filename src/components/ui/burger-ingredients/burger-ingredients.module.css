@@ -33,3 +33,32 @@ p {
   font-size: 24px;
   line-height: 30px;
 }
+
+@media (max-width: 768px) {
+  .burger_ingredients {
+    max-width: none;
+  }
+
+  /* вкладки остаются на виду, пока листается список */
+  .burger_ingredients nav {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #131316;
+  }
+
+  .menu > div {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-right: 4px;
+    padding-left: 4px;
+  }
+
+  .content {
+    overflow-y: visible;
+  }
+
+  .content h3 {
+    scroll-margin-top: 72px;
+  }
+}

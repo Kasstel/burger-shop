@@ -19,3 +19,25 @@
   height: 100%;
   overflow: hidden;
 }
+
+@media (max-width: 768px) {
+  .containerMain {
+    overflow: visible;
+    width: 100%;
+  }
+
+  h1.title {
+    box-sizing: border-box;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    padding-left: 16px;
+  }
+
+  div.main {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}

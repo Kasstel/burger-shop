@@ -26,3 +26,12 @@
 .detailHeader {
   text-align: center;
 }
+
+@media (max-width: 768px) {
+  /* на телефоне прокручивается вся страница, а не колонки внутри неё */
+  .app {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+}

@@ -14,3 +14,14 @@
   width: 100%;
   max-width: 536px;
 }
+
+@media (max-width: 768px) {
+  li.element {
+    margin-right: 0;
+  }
+
+  .element_fullwidth {
+    min-width: 0;
+    max-width: none;
+  }
+}

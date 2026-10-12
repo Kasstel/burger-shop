@@ -32,3 +32,9 @@
 .content {
   text-align: left;
 }
+
+@media (max-width: 768px) {
+  .column {
+    box-sizing: border-box;
+  }
+}

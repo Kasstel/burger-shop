@@ -33,3 +33,13 @@
   background: linear-gradient(63.18deg, #801ab3 0%, #4c4cff 100%);
   transition: width 1s linear;
 }
+
+@media (max-width: 768px) {
+  .steps {
+    gap: 8px;
+  }
+
+  .step:last-child {
+    text-align: right;
+  }
+}

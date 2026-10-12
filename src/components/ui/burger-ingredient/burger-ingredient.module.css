@@ -35,3 +35,25 @@
   align-self: center;
   object-fit: contain;
 }
+
+@media (max-width: 768px) {
+  .article,
+  .addButton {
+    width: 100%;
+  }
+
+  button.addButton {
+    margin-top: 16px;
+  }
+
+  .img {
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+    aspect-ratio: 2 / 1;
+  }
+
+  .text {
+    overflow-wrap: anywhere;
+  }
+}

@@ -17,3 +17,14 @@
 .text {
   color: #8585ad;
 }
+
+@media (max-width: 768px) {
+  .img {
+    max-width: 100%;
+    margin: 24px 0;
+  }
+
+  .progress {
+    width: 100%;
+  }
+}

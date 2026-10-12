@@ -21,3 +21,12 @@
 .button:hover {
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  a.link,
+  button.button {
+    width: auto;
+    padding: 12px 0;
+    font-size: 16px;
+  }
+}
