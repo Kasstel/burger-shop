@@ -87,6 +87,12 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/burger-shop/'
   },
+  performance: {
+    // React, Redux, роутер и UI-кит вместе весят больше стандартного порога в 244 КБ,
+    // поэтому порог поднят до реального размера приложения (в gzip это около 120 КБ)
+    maxEntrypointSize: 512 * 1024,
+    maxAssetSize: 512 * 1024
+  },
   devServer: {
     // dist не раздаём: иначе по адресу / открывается страница из прошлой сборки
     static: false,
