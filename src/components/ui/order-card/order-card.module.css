@@ -56,6 +56,7 @@
   right: 25px;
   width: 112px;
   height: 56px;
+  object-fit: contain;
 }
 
 .remains {

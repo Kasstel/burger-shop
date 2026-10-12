@@ -198,6 +198,10 @@ const config: JestConfigWithTsJest = {
   // Whether to use watchman for file crawling
   // watchman: true,
   preset: 'ts-jest',
+  // картинки, которые импортируются в данных (фото бургеров и ингредиентов)
+  moduleNameMapper: {
+    '\\.(png|jpe?g|svg)$': '<rootDir>/src/__mocks__/file-mock.ts'
+  },
   transform: {
           // '^.+\\.[tj]sx?$' для обработки файлов js/ts с помощью `ts-jest`
           // '^.+\\.m?[tj]sx?$' для обработки файлов js/ts/mjs/mts с помощью `ts-jest`

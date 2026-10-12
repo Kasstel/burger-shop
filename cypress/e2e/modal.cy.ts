@@ -2,11 +2,7 @@ import selectors from '../support/selectors';
 
 describe('Модальное окно ингредиента', () => {
   beforeEach(() => {
-    cy.intercept('GET', '**/api/ingredients', {
-      fixture: 'ingredients.json',
-    }).as('getIngredients');
-    cy.visit('/');
-    cy.wait('@getIngredients');
+    cy.visit('/#/constructor');
   });
 
   it('открывает модалку с корректным ингредиентом', () => {
@@ -17,8 +13,12 @@ describe('Модальное окно ингредиента', () => {
 
       cy.get(selectors.modal).should('exist');
       cy.get(selectors.modalTitle).should('contain.text', 'Детали ингредиента');
-      cy.get(selectors.ingredientName).should('have.text', name);
-      cy.get(selectors.ingredientImage).should('be.visible');
+      cy.get(selectors.modal)
+        .find(selectors.ingredientName)
+        .should('have.text', name);
+      cy.get(selectors.modal)
+        .find(selectors.ingredientImage)
+        .should('be.visible');
     });
   });
 

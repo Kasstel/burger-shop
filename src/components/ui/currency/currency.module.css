@@ -1,0 +1,11 @@
+.currency {
+  font-family: 'Jet Brains Mono', sans-serif;
+  font-size: 20px;
+  line-height: 24px;
+  color: #f2f2f3;
+}
+
+.large {
+  font-size: 36px;
+  line-height: 36px;
+}

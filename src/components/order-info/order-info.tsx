@@ -4,6 +4,7 @@ import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useDispatch, useSelector } from '../../services/store';
 import {
+  clearSelectedOrder,
   getOrderByNumberAsync,
   orderModalSelector
 } from '../../slices/orderSlice';
@@ -21,6 +22,10 @@ export const OrderInfo: FC = () => {
     if (number) {
       dispatch(getOrderByNumberAsync(Number(number)));
     }
+    // иначе просмотренный заказ всплывёт в конструкторе как только что оформленный
+    return () => {
+      dispatch(clearSelectedOrder());
+    };
   }, [number, dispatch]);
 
   const orderInfo = useMemo(() => {

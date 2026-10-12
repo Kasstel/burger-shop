@@ -3,13 +3,13 @@ import { FeedUI } from '@ui-pages';
 import { TOrder } from '@utils-types';
 import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from '../../services/store';
-import { fetchOrdersAsync, ordersSelector } from '../../slices/orderSlice';
+import { fetchOrdersFeed, ordersSelector } from '../../slices/orderSlice';
 
 export const Feed: FC = () => {
   const dispatch = useDispatch();
   const orders: TOrder[] = useSelector(ordersSelector);
   useEffect(() => {
-    dispatch(fetchOrdersAsync());
+    dispatch(fetchOrdersFeed());
   }, [dispatch]);
 
   if (!orders.length) {
@@ -20,7 +20,7 @@ export const Feed: FC = () => {
     <FeedUI
       orders={orders}
       handleGetFeeds={() => {
-        dispatch(fetchOrdersAsync());
+        dispatch(fetchOrdersFeed());
       }}
     />
   );

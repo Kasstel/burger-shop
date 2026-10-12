@@ -5,8 +5,8 @@ import {
   getOrderByNumberApi,
   getFeedsApi
 } from '../utils/burger-api';
-import { TOrder } from '../utils/types';
-import { clearConstructor } from './burgerConstructorSlice';
+import { TOrder, TOrderRequest } from '../utils/types';
+import { clearCart } from './cartSlice';
 import type { AppDispatch } from '../services/store';
 
 interface OrdersState {
@@ -58,13 +58,13 @@ export const fetchOrdersAsync = createAsyncThunk<
 
 export const orderBurgerAsync = createAsyncThunk<
   { order: TOrder; name: string },
-  string[],
+  TOrderRequest,
   { rejectValue: string; dispatch: AppDispatch }
->('orders/create', async (ingredients, { rejectWithValue, dispatch }) => {
+>('orders/create', async (request, { rejectWithValue, dispatch }) => {
   try {
-    const response = await orderBurgerApi(ingredients);
+    const response = await orderBurgerApi(request);
 
-    dispatch(clearConstructor());
+    dispatch(clearCart());
 
     return response;
   } catch (err: any) {

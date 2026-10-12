@@ -1,22 +1,20 @@
 import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Button,
-  ConstructorElement,
-  CurrencyIcon
+  ConstructorElement
 } from '@zlden/react-developer-burger-ui-components';
 import styles from './burger-constructor.module.css';
 import { BurgerConstructorUIProps } from './type';
 import { TConstructorIngredient } from '@utils-types';
-import { BurgerConstructorElement, Modal } from '@components';
-import { Preloader, OrderDetailsUI } from '@ui';
+import { BurgerConstructorElement } from '@components';
+import { Currency } from '@ui';
 
 export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
   constructorItems,
-  orderRequest,
   price,
-  orderModalData,
-  onOrderClick,
-  closeOrderModal
+  isAddedToCart,
+  onAddToCart
 }) => (
   <section className={styles.burger_constructor}>
     {constructorItems.bun ? (
@@ -77,33 +75,27 @@ export const BurgerConstructorUI: FC<BurgerConstructorUIProps> = ({
       </div>
     )}
     <div className={`${styles.total} mt-10 mr-4`}>
+      {isAddedToCart && (
+        <Link
+          to='/cart'
+          className={`${styles.cartLink} text text_type_main-default mr-10`}
+          data-testid='go-to-cart'
+        >
+          Бургер в корзине — оформить
+        </Link>
+      )}
       <div className={`${styles.cost} mr-10`}>
         <p className={`text ${styles.text} mr-2`}>{price}</p>
-        <CurrencyIcon type='primary' />
+        <Currency size='large' />
       </div>
       <Button
         htmlType='button'
         type='primary'
         size='large'
-        children='Оформить заказ'
-        onClick={onOrderClick}
-        data-testid='order-button'
+        children='В корзину'
+        onClick={onAddToCart}
+        data-testid='add-to-cart-button'
       />
     </div>
-
-    {orderRequest && (
-      <Modal onClose={closeOrderModal} title={'Оформляем заказ...'}>
-        <Preloader />
-      </Modal>
-    )}
-
-    {orderModalData && (
-      <Modal
-        onClose={closeOrderModal}
-        title={orderRequest ? 'Оформляем заказ...' : ''}
-      >
-        <OrderDetailsUI orderNumber={orderModalData.number} />
-      </Modal>
-    )}
   </section>
 );

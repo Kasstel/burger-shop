@@ -28,3 +28,10 @@
   width: 260px;
   justify-content: center;
 }
+
+.img {
+  width: 240px;
+  height: 120px;
+  align-self: center;
+  object-fit: contain;
+}

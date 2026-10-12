@@ -1,46 +1,39 @@
-import { FC, useMemo } from 'react';
-import { TConstructorIngredient, TIngredient } from '@utils-types';
+import { FC, useEffect, useMemo, useState } from 'react';
+import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { RootState, useDispatch, useSelector } from '../../services/store';
-import {
-  clearSelectedOrder,
-  orderBurgerAsync,
-  orderModalSelector,
-  orderRequestSelector
-} from '../../slices/orderSlice';
-import { useNavigate } from 'react-router-dom';
-import { userSelector } from '../../slices/authSlice';
+import { clearConstructor } from '../../slices/burgerConstructorSlice';
+import { addToCart } from '../../slices/cartSlice';
 
 export const constructorIngredients = (state: RootState) =>
   state.burgerConstructor;
 
+const OWN_BURGER_NAME = 'Свой бургер';
+
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const constructorItems = useSelector(constructorIngredients);
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
 
-  const user = useSelector(userSelector);
-  const orderRequest = useSelector(orderRequestSelector);
+  const isEmpty =
+    !constructorItems.bun && constructorItems.ingredients.length === 0;
 
-  const orderModalData = useSelector(orderModalSelector);
+  // ссылка на корзину пропадает, как только начали собирать следующий бургер
+  useEffect(() => {
+    if (!isEmpty) setIsAddedToCart(false);
+  }, [isEmpty]);
 
-  const onOrderClick = () => {
-    if (!user) {
-      dispatch(clearSelectedOrder());
-      navigate('/login', { state: { from: location.pathname } });
-      return;
-    }
-    if (!constructorItems.bun || orderRequest) return;
-    const ingredientsIds = [
-      constructorItems.bun._id,
-      ...constructorItems.ingredients.map((item) => item._id),
-      constructorItems.bun._id
-    ];
-
-    dispatch(orderBurgerAsync(ingredientsIds));
-  };
-  const closeOrderModal = () => {
-    dispatch(clearSelectedOrder());
+  const onAddToCart = () => {
+    if (!constructorItems.bun) return;
+    dispatch(
+      addToCart({
+        name: constructorItems.name ?? OWN_BURGER_NAME,
+        bun: constructorItems.bun,
+        ingredients: constructorItems.ingredients
+      })
+    );
+    dispatch(clearConstructor());
+    setIsAddedToCart(true);
   };
 
   const price = useMemo(
@@ -56,11 +49,9 @@ export const BurgerConstructor: FC = () => {
   return (
     <BurgerConstructorUI
       price={price}
-      orderRequest={orderRequest}
       constructorItems={constructorItems}
-      orderModalData={orderModalData}
-      onOrderClick={onOrderClick}
-      closeOrderModal={closeOrderModal}
+      isAddedToCart={isAddedToCart}
+      onAddToCart={onAddToCart}
     />
   );
 };

@@ -52,7 +52,8 @@ module.exports = {
       extensions: ['.js', '.jsx', '.ts', '.tsx']
     }),
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: './public/index.html',
+      favicon: './src/images/logo.png'
     }),
     new Dotenv()
   ],
@@ -87,9 +88,11 @@ module.exports = {
     publicPath: '/burger-shop/'
   },
   devServer: {
-    static: path.join(__dirname, './dist'),
+    // dist не раздаём: иначе по адресу / открывается страница из прошлой сборки
+    static: false,
     compress: true,
-    historyApiFallback: true,
+    // приложение лежит в подпапке, поэтому любой адрес ведёт на её index.html
+    historyApiFallback: { index: '/burger-shop/' },
     port: 4000
   }
 };

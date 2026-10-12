@@ -5,14 +5,16 @@ import { TAppHeaderUIProps } from './type';
 import {
   BurgerIcon,
   ListIcon,
-  Logo,
+  MenuIcon,
   ProfileIcon
 } from '@zlden/react-developer-burger-ui-components';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, RootState } from '../../../services/store';
+import { cartCountSelector } from '../../../slices/cartSlice';
 
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
   const user = useSelector((state: RootState) => state.user.user);
+  const cartCount = useSelector(cartCountSelector);
   const profilePath = user ? '/profile' : '/login';
   const location = useLocation(); // получаем объект location
   const currentPath = location.pathname; // текущий путь
@@ -26,10 +28,21 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
               currentPath === '/' ? styles.link_active : ''
             }`}
           >
+            <MenuIcon type={'primary'} />
+            <p className='text text_type_main-default ml-2 mr-8'>Меню</p>
+          </Link>
+
+          <Link
+            to='/constructor'
+            className={`${styles.link} ${
+              currentPath === '/constructor' ||
+              currentPath.startsWith('/ingredients')
+                ? styles.link_active
+                : ''
+            }`}
+          >
             <BurgerIcon type={'primary'} />
-            <p className='text text_type_main-default ml-2 mr-10'>
-              Конструктор
-            </p>
+            <p className='text text_type_main-default ml-2 mr-8'>Конструктор</p>
           </Link>
 
           <Link
@@ -43,11 +56,29 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
           </Link>
         </div>
 
-        <div className={styles.logo}>
-          <img src={logo} />
-        </div>
+        <Link to='/' className={styles.logo}>
+          <img src={logo} alt='' />
+          <span className='text text_type_main-medium ml-3'>Burger Shop</span>
+        </Link>
 
         <div className={styles.link_position_last}>
+          <Link
+            to='/cart'
+            className={`${styles.link} mr-8 ${
+              currentPath === '/cart' ? styles.link_active : ''
+            }`}
+            data-testid='cart-link'
+          >
+            <p className='text text_type_main-default'>Корзина</p>
+            {cartCount > 0 && (
+              <span
+                className={`${styles.cartCount} text text_type_main-default ml-2`}
+                data-testid='cart-count'
+              >
+                {cartCount}
+              </span>
+            )}
+          </Link>
           <Link
             to={profilePath}
             className={`${styles.link} ${

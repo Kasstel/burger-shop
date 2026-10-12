@@ -6,7 +6,8 @@ import {
   forgotPasswordApi,
   resetPasswordApi,
   updateUserApi,
-  logoutApi
+  logoutApi,
+  saveTokens
 } from '../utils/burger-api';
 import { TUser } from '@utils-types';
 import { deleteCookie, setCookie } from '../utils/cookie';
@@ -71,7 +72,7 @@ export const logoutAsync = createAsyncThunk<
 >('user/logoutUser', async (_, { dispatch, rejectWithValue }) => {
   try {
     await logoutApi();
-    localStorage.clear();
+    localStorage.removeItem('refreshToken');
     deleteCookie('accessToken');
     dispatch(userLogout());
   } catch (err: any) {
@@ -84,6 +85,7 @@ export const registerUserAsync = createAsyncThunk(
   'user/register',
   async (userData: { email: string; password: string; name: string }) => {
     const response = await registerUserApi(userData);
+    saveTokens(response);
     return response.user;
   }
 );
@@ -183,6 +185,11 @@ export const userSlice = createSlice({
       .addCase(resetPasswordAsync.rejected, (state, action) => {
         state.error = action.payload || 'Ошибка сброса пароля';
         state.isLoading = false;
+      })
+
+      .addCase(registerUserAsync.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isAuthChecked = true;
       })
 
       .addCase(loginUserAsync.pending, (state) => {

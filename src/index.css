@@ -1,3 +1,20 @@
 body {
   margin: 0;
 }
+
+/* в строке конструктора из UI-кита меняем значок валюты на рубль */
+.constructor-element__price svg {
+  display: none;
+}
+
+.constructor-element__price::after {
+  content: '₽';
+  margin-left: 8px;
+  font-family: 'Jet Brains Mono', sans-serif;
+  font-size: 20px;
+}
+
+/* фото ингредиентов квадратные, а место под них в UI-ките — 2:1 */
+.constructor-element__image {
+  object-fit: contain;
+}

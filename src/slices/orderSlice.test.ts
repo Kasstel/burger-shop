@@ -44,7 +44,10 @@ describe('orderSlice', () => {
     const payload = { order: orderMock, name: 'Тест' };
     const state = reducer(
       undefined,
-      orderBurgerAsync.fulfilled(payload, '', ['1', '2'])
+      orderBurgerAsync.fulfilled(payload, '', {
+        items: [{ name: 'Тест', ingredients: ['1', '2', '1'], count: 1 }],
+        delivery: { type: 'pickup' }
+      })
     );
     expect(state.orders[0]).toEqual(orderMock);
     expect(state.selectedOrder).toEqual(orderMock);

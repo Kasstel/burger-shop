@@ -1,6 +1,967 @@
 {
-  "generatedAt": "2026-05-02T17:55:01.378Z",
+  "generatedAt": "2026-05-02T18:27:07.182Z",
   "components": [
+    {
+      "name": "App",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/app/app.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "@pages",
+        "../../index.css",
+        "./app.module.css",
+        "@components",
+        "react-router-dom",
+        "../../slices/ingredientsSlice",
+        "../../services/store",
+        "../protected-route/protected-route",
+        "react",
+        "../../slices/authSlice"
+      ],
+      "hooks": [
+        {
+          "name": "useLocation",
+          "line": 24
+        },
+        {
+          "name": "useNavigate",
+          "line": 25
+        },
+        {
+          "name": "useDispatch",
+          "line": 27
+        },
+        {
+          "name": "useEffect",
+          "line": 28
+        }
+      ],
+      "isExported": false,
+      "exportType": "named"
+    },
+    {
+      "name": "AppHeader",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/app-header/app-header.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "@ui"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "BurgerConstructor",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/burger-constructor/burger-constructor.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "@utils-types",
+        "@ui",
+        "../../services/store",
+        "../../slices/orderSlice",
+        "react-router-dom",
+        "../../slices/authSlice"
+      ],
+      "hooks": [
+        {
+          "name": "useDispatch",
+          "line": 18
+        },
+        {
+          "name": "useNavigate",
+          "line": 19
+        },
+        {
+          "name": "useSelector",
+          "line": 20
+        },
+        {
+          "name": "useSelector",
+          "line": 22
+        },
+        {
+          "name": "useSelector",
+          "line": 23
+        },
+        {
+          "name": "useSelector",
+          "line": 25
+        },
+        {
+          "name": "useMemo",
+          "line": 46
+        }
+      ],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "BurgerIngredients",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/burger-ingredients/burger-ingredients.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "react-intersection-observer",
+        "@utils-types",
+        "../ui/burger-ingredients",
+        "../../services/store",
+        "../../slices/ingredientsSlice"
+      ],
+      "hooks": [
+        {
+          "name": "useSelector",
+          "line": 15
+        },
+        {
+          "name": "useSelector",
+          "line": 16
+        },
+        {
+          "name": "useSelector",
+          "line": 17
+        },
+        {
+          "name": "useState",
+          "line": 18
+        },
+        {
+          "name": "useRef",
+          "line": 19
+        },
+        {
+          "name": "useRef",
+          "line": 20
+        },
+        {
+          "name": "useRef",
+          "line": 21
+        },
+        {
+          "name": "useInView",
+          "line": 23
+        },
+        {
+          "name": "useInView",
+          "line": 27
+        },
+        {
+          "name": "useInView",
+          "line": 31
+        },
+        {
+          "name": "useEffect",
+          "line": 35
+        }
+      ],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "FeedInfo",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/feed-info/feed-info.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "@utils-types",
+        "../ui/feed-info",
+        "../../services/store",
+        "../../slices/orderSlice"
+      ],
+      "hooks": [
+        {
+          "name": "useDispatch",
+          "line": 16
+        },
+        {
+          "name": "useSelector",
+          "line": 18
+        },
+        {
+          "name": "useEffect",
+          "line": 22
+        }
+      ],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "IngredientDetails",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ingredient-details/ingredient-details.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "../ui/preloader",
+        "../ui/ingredient-details",
+        "../../services/store",
+        "react-router-dom"
+      ],
+      "hooks": [
+        {
+          "name": "useParams",
+          "line": 8
+        },
+        {
+          "name": "useSelector",
+          "line": 9
+        }
+      ],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "OrderInfo",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/order-info/order-info.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "../ui/preloader",
+        "../ui/order-info",
+        "@utils-types",
+        "../../services/store",
+        "../../slices/orderSlice",
+        "../../slices/ingredientsSlice",
+        "react-router-dom"
+      ],
+      "hooks": [
+        {
+          "name": "useSelector",
+          "line": 14
+        },
+        {
+          "name": "useDispatch",
+          "line": 15
+        },
+        {
+          "name": "useSelector",
+          "line": 16
+        },
+        {
+          "name": "useParams",
+          "line": 18
+        },
+        {
+          "name": "useEffect",
+          "line": 20
+        },
+        {
+          "name": "useMemo",
+          "line": 26
+        }
+      ],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "OrderStatus",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/order-status/order-status.tsx",
+      "props": [
+        {
+          "name": "status",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "./type",
+        "@ui"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "ProfileMenu",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/profile-menu/profile-menu.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "react-router-dom",
+        "@ui",
+        "../../services/store",
+        "../../slices/authSlice"
+      ],
+      "hooks": [
+        {
+          "name": "useLocation",
+          "line": 8
+        },
+        {
+          "name": "useDispatch",
+          "line": 9
+        },
+        {
+          "name": "useNavigate",
+          "line": 10
+        }
+      ],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "ProtectedRoute",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/protected-route/protected-route.tsx",
+      "props": [
+        {
+          "name": "onlyUnAuth",
+          "type": "boolean | undefined",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "children",
+          "type": "ReactElement<any, string | JSXElementConstructor<any>>",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "@ui",
+        "../../services/store",
+        "react-router"
+      ],
+      "hooks": [
+        {
+          "name": "useLocation",
+          "line": 14
+        },
+        {
+          "name": "useSelector",
+          "line": 16
+        }
+      ],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "AppHeaderUI",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/app-header/app-header.tsx",
+      "props": [
+        {
+          "name": "userName",
+          "type": "string | undefined",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "./app-header.module.css",
+        "../../../images/logo.png",
+        "./type",
+        "@zlden/react-developer-burger-ui-components",
+        "react-router-dom",
+        "../../../services/store"
+      ],
+      "hooks": [
+        {
+          "name": "useSelector",
+          "line": 15
+        },
+        {
+          "name": "useLocation",
+          "line": 17
+        }
+      ],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "BurgerConstructorUI",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/burger-constructor/burger-constructor.tsx",
+      "props": [
+        {
+          "name": "constructorItems",
+          "type": "any",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "orderRequest",
+          "type": "boolean",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "price",
+          "type": "number",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "orderModalData",
+          "type": "TOrder | null",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "onOrderClick",
+          "type": "() => void",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "closeOrderModal",
+          "type": "() => void",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "@zlden/react-developer-burger-ui-components",
+        "./burger-constructor.module.css",
+        "./type",
+        "@utils-types",
+        "@components",
+        "@ui"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "HalfColumn",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/feed-info/feed-info.tsx",
+      "props": [
+        {
+          "name": "orders",
+          "type": "number[]",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "textColor",
+          "type": "string | undefined",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "./feed-info.module.css",
+        "./type"
+      ],
+      "hooks": [],
+      "isExported": false,
+      "exportType": "named"
+    },
+    {
+      "name": "Column",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/feed-info/feed-info.tsx",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "content",
+          "type": "number",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "./feed-info.module.css",
+        "./type"
+      ],
+      "hooks": [],
+      "isExported": false,
+      "exportType": "named"
+    },
+    {
+      "name": "ModalOverlayUI",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/modal-overlay/modal-overlay.tsx",
+      "props": [
+        {
+          "name": "onClick",
+          "type": "() => void",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "./modal-overlay.module.css"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "OrderDetailsUI",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/order-details/order-details.tsx",
+      "props": [
+        {
+          "name": "orderNumber",
+          "type": "number",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "./order-details.module.css",
+        "../../../images/done.svg",
+        "./type"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "OrderStatusUI",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/order-status/order-status.tsx",
+      "props": [
+        {
+          "name": "textStyle",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "text",
+          "type": "string",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "./type"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "OrdersListUI",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/orders-list/orders-list.tsx",
+      "props": [
+        {
+          "name": "orderByDate",
+          "type": "TOrder[]",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "./orders-list.module.css",
+        "./type",
+        "@components"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "ConstructorPageUI",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/pages/constructor-page/constructor-page.tsx",
+      "props": [
+        {
+          "name": "isIngredientsLoading",
+          "type": "boolean",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "./constructor-page.module.css",
+        "./type",
+        "@ui",
+        "@components"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "ForgotPasswordUI",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/pages/forgot-password/forgot-password.tsx",
+      "props": [
+        {
+          "name": "errorText",
+          "type": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "setEmail",
+          "type": "Dispatch<SetStateAction<string>>",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "handleSubmit",
+          "type": "(e: SyntheticEvent<Element, Event>) => void",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "@zlden/react-developer-burger-ui-components",
+        "../common.module.css",
+        "react-router-dom",
+        "../common-type"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "LoginUI",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/pages/login/login.tsx",
+      "props": [
+        {
+          "name": "errorText",
+          "type": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "setEmail",
+          "type": "Dispatch<SetStateAction<string>>",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "handleSubmit",
+          "type": "(e: SyntheticEvent<Element, Event>) => void",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "password",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "setPassword",
+          "type": "Dispatch<SetStateAction<string>>",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "@zlden/react-developer-burger-ui-components",
+        "../common.module.css",
+        "react-router-dom",
+        "./type"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "ProfileUI",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/pages/profile/profile.tsx",
+      "props": [
+        {
+          "name": "formValue",
+          "type": "{ name: string; email: string; password: string; }",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "isFormChanged",
+          "type": "boolean",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "handleSubmit",
+          "type": "(e: SyntheticEvent<Element, Event>) => void",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "handleCancel",
+          "type": "(e: SyntheticEvent<Element, Event>) => void",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "handleInputChange",
+          "type": "(e: ChangeEvent<HTMLInputElement>) => void",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "updateUserError",
+          "type": "string | undefined",
+          "required": false,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "@zlden/react-developer-burger-ui-components",
+        "./profile.module.css",
+        "../common.module.css",
+        "./type",
+        "@components"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "ProfileOrdersUI",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/pages/profile-orders/profile-orders.tsx",
+      "props": [
+        {
+          "name": "orders",
+          "type": "TOrder[]",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "./profile-orders.module.css",
+        "./type",
+        "@components"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "RegisterUI",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/pages/register/register.tsx",
+      "props": [
+        {
+          "name": "errorText",
+          "type": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "setEmail",
+          "type": "Dispatch<SetStateAction<string>>",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "handleSubmit",
+          "type": "(e: SyntheticEvent<Element, Event>) => void",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "password",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "userName",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "setPassword",
+          "type": "Dispatch<SetStateAction<string>>",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "setUserName",
+          "type": "Dispatch<SetStateAction<string>>",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "@zlden/react-developer-burger-ui-components",
+        "../common.module.css",
+        "react-router-dom",
+        "./type"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "ResetPasswordUI",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/pages/reset-password/reset-password.tsx",
+      "props": [
+        {
+          "name": "errorText",
+          "type": "string | undefined",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "handleSubmit",
+          "type": "(e: SyntheticEvent<Element, Event>) => void",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "password",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "token",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "setPassword",
+          "type": "Dispatch<SetStateAction<string>>",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "setToken",
+          "type": "Dispatch<SetStateAction<string>>",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "@zlden/react-developer-burger-ui-components",
+        "../common.module.css",
+        "react-router-dom",
+        "./type"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "Preloader",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/preloader/preloader.tsx",
+      "props": [],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "./preloader.module.css"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
+    {
+      "name": "ProfileMenuUI",
+      "description": "",
+      "filePath": "C:/Users/kasstel/dev/stellar-burgers/src/components/ui/profile-menu/profile-menu.tsx",
+      "props": [
+        {
+          "name": "pathname",
+          "type": "string",
+          "required": true,
+          "description": ""
+        },
+        {
+          "name": "handleLogout",
+          "type": "() => void",
+          "required": true,
+          "description": ""
+        }
+      ],
+      "examples": [],
+      "dependencies": [
+        "react",
+        "./profile-menu.module.css",
+        "react-router-dom",
+        "./type"
+      ],
+      "hooks": [],
+      "isExported": true,
+      "exportType": "named"
+    },
     {
       "name": "ConstructorPage",
       "description": "",

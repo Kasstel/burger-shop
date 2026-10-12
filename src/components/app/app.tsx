@@ -1,7 +1,9 @@
 import {
+  Cart,
   ConstructorPage,
   Feed,
   Login,
+  Menu,
   Register,
   ForgotPassword,
   ResetPassword,
@@ -23,7 +25,7 @@ import { checkUserAuth } from '../../slices/authSlice';
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  const background = location.state?.backgroundLocation;
+  const background = location.state?.background;
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchIngredients());
@@ -37,7 +39,9 @@ function App() {
     <div className={styles.app}>
       <AppHeader />
       <Routes location={background || location}>
-        <Route path='/' element={<ConstructorPage />} />
+        <Route path='/' element={<Menu />} />
+        <Route path='/constructor' element={<ConstructorPage />} />
+        <Route path='/cart' element={<Cart />} />
         <Route path='/feed' element={<Feed />} />
         <Route
           path='/login'

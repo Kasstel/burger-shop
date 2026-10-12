@@ -24,7 +24,8 @@ export const ProtectedRoute = ({
   }
 
   if (onlyUnAuth && user) {
-    return <Navigate to='/' replace />;
+    // после входа возвращаем туда, откуда пользователя отправили логиниться
+    return <Navigate to={location.state?.from ?? '/'} replace />;
   }
 
   return children;

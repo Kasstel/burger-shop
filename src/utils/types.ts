@@ -23,7 +23,13 @@ export type TOrder = {
   createdAt: string;
   updatedAt: string;
   number: number;
-  ingredients: string[];
+  ingredients: string[]; // все ингредиенты заказа одним списком
+  // поля ниже есть только у заказов, оформленных через корзину
+  items?: TOrderItem[];
+  delivery?: TDelivery;
+  comment?: string;
+  minutes?: number; // обещанное время готовности
+  readyAt?: string; // ISO
 };
 
 export type TOrdersData = {
@@ -40,3 +46,41 @@ export type TUser = {
 export type TTabMode = 'bun' | 'sauce' | 'main';
 
 export type TIngredientType = TTabMode | 'top' | 'bottom';
+
+export type TBurger = {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  badge?: string;
+  ingredients: string[];
+};
+
+export type TDeliveryType = 'pickup' | 'delivery';
+
+export type TDelivery = {
+  type: TDeliveryType;
+  address?: string;
+  phone?: string;
+};
+
+// бургер в заказе: ingredients — _id, булка первой и последней
+export type TOrderItem = {
+  name: string;
+  ingredients: string[];
+  count: number;
+};
+
+export type TOrderRequest = {
+  items: TOrderItem[];
+  delivery: TDelivery;
+  comment?: string;
+};
+
+export type TCartItem = {
+  id: string;
+  name: string;
+  bun: TIngredient;
+  ingredients: TIngredient[];
+  count: number;
+};

@@ -11,7 +11,7 @@
 
 .menu_part_left {
   display: flex;
-  flex-basis: 35%;
+  flex-basis: 40%;
 }
 
 .link {
@@ -27,11 +27,26 @@
 .link_position_last {
   display: flex;
   justify-content: flex-end;
-  flex-basis: 35%;
+  flex-basis: 40%;
 }
 
 .logo {
   display: flex;
   align-items: center;
   margin: 0 auto;
+  color: var(--text-primary-color);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cartCount {
+  box-sizing: border-box;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 6px;
+  border-radius: 12px;
+  background: var(--colors-interface-accent);
+  color: var(--text-primary-color);
+  font-size: 14px;
+  text-align: center;
 }

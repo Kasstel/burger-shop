@@ -5,6 +5,7 @@ export default defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-    baseUrl: 'http://localhost:4000',
+    // приложение раздаётся из подпапки (publicPath в webpack.config.js)
+    baseUrl: 'http://localhost:4000/burger-shop',
   },
 });

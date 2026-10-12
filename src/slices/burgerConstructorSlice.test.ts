@@ -1,6 +1,7 @@
 import { TConstructorIngredient, TIngredient } from '@utils-types';
 import reducer, {
   addIngredient,
+  setBurger,
   removeIngredient,
   removeBun,
   moveIngredient,
@@ -78,20 +79,24 @@ describe('burgerConstructorSlice', () => {
   });
 
   it('должен удалить ингредиент', () => {
+    const first = mockIngredient();
+    const second = mockIngredient();
     const startState = {
+      name: null,
       bun: null,
-      ingredients: [mockIngredient()]
+      ingredients: [first, second]
     };
-    const state = reducer(startState, removeIngredient('main1'));
-    expect(state.ingredients).toHaveLength(1);
+    const state = reducer(startState, removeIngredient('unknown'));
+    expect(state.ingredients).toHaveLength(2);
 
-    const state2 = reducer(startState, removeIngredient('123'));
-    expect(state2.ingredients).toHaveLength(0);
+    // одинаковые ингредиенты удаляются по одному
+    const state2 = reducer(startState, removeIngredient(first.id));
+    expect(state2.ingredients).toEqual([second]);
   });
 
   it('должен удалить булку', () => {
     const state = reducer(
-      { bun, ingredients: [mockIngredient()] },
+      { name: null, bun, ingredients: [mockIngredient()] },
       removeBun()
     );
     expect(state.bun).toBeNull();
@@ -99,6 +104,7 @@ describe('burgerConstructorSlice', () => {
 
   it('должен переместить ингредиент', () => {
     const startState = {
+      name: null,
       bun: null,
       ingredients: [
         { ...main, id: '1' },
@@ -115,8 +121,26 @@ describe('burgerConstructorSlice', () => {
   });
 
   it('должен очищать конструктор', () => {
-    const startState = { bun, ingredients: [mockIngredient()] };
+    const startState = {
+      name: 'Чизбургер',
+      bun,
+      ingredients: [mockIngredient()]
+    };
     const state = reducer(startState, clearConstructor());
-    expect(state).toEqual({ bun: null, ingredients: [] });
+    expect(state).toEqual({ name: null, bun: null, ingredients: [] });
+  });
+
+  it('загружает готовый бургер и забывает его название после правки', () => {
+    const loaded = reducer(
+      undefined,
+      setBurger({ name: 'Чизбургер', bun, ingredients: [main, main] })
+    );
+    expect(loaded.name).toBe('Чизбургер');
+    expect(loaded.bun).toEqual(bun);
+    expect(loaded.ingredients).toHaveLength(2);
+    expect(loaded.ingredients[0].id).not.toBe(loaded.ingredients[1].id);
+
+    const changed = reducer(loaded, addIngredient(sauce));
+    expect(changed.name).toBeNull();
   });
 });

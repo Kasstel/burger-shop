@@ -2,11 +2,7 @@ import selectors from 'cypress/support/selectors';
 
 describe('Конструктор бургера', () => {
   beforeEach(() => {
-    cy.intercept('GET', '**/api/ingredients', {
-      fixture: 'ingredients.json'
-    }).as('getIngredients');
-    cy.visit('/');
-    cy.wait('@getIngredients');
+    cy.visit('/#/constructor');
   });
 
   it('добавляет ингредиент в конструктор', () => {

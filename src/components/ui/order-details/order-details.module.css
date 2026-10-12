@@ -1,5 +1,10 @@
 .img {
-  margin: 61px 0;
+  margin: 40px 0;
+}
+
+.progress {
+  width: 480px;
+  text-align: center;
 }
 
 .title {

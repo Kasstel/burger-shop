@@ -30,6 +30,7 @@ export const ResetPassword: FC = () => {
   return (
     <ResetPasswordUI
       errorText={error?.message}
+      hint={`Демо-режим, письмо не отправляется. Код: ${localStorage.getItem('resetPassword') ?? ''}`}
       password={password}
       token={token}
       setPassword={setPassword}

@@ -12,6 +12,15 @@ const selectors = {
   sauceCard: '[data-type="sauce"]',
   addButton: 'Добавить',
   orderButton: '[data-testid="order-button"]',
+  addToCartButton: '[data-testid="add-to-cart-button"]',
+  goToCart: '[data-testid="go-to-cart"]',
+  cartLink: '[data-testid="cart-link"]',
+  cartCount: '[data-testid="cart-count"]',
+  cartItem: '[data-testid="cart-item"]',
+  cartItemCount: '[data-testid="cart-item-count"]',
+  cartEta: '[data-testid="cart-eta"]',
+  orderProgress: '[data-testid="order-progress"]',
+  menuCard: '[data-testid="menu-card"]',
 };
 
 export default selectors;

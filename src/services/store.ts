@@ -10,12 +10,14 @@ import userReducer from '../slices/authSlice';
 import ingredientsReducer from '../slices/ingredientsSlice';
 import burgerConstructorReducer from '../slices/burgerConstructorSlice';
 import ordersReducer from '../slices/orderSlice';
+import cartReducer from '../slices/cartSlice';
 
 export const rootReducer = combineReducers({
   user: userReducer,
   ingredients: ingredientsReducer,
   burgerConstructor: burgerConstructorReducer,
-  orders: ordersReducer
+  orders: ordersReducer,
+  cart: cartReducer
 });
 
 // Создаём Redux Store

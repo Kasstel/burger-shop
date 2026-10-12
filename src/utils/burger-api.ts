@@ -1,65 +1,60 @@
 import { setCookie, getCookie } from './cookie';
-import { TIngredient, TOrder, TOrdersData, TUser } from './types';
+import { TIngredient, TOrder, TOrderRequest, TUser } from './types';
+import { ingredients } from '../data/ingredients';
+import {
+  TStoredUser,
+  addOrder,
+  clearResetRequest,
+  createResetCode,
+  findOrder,
+  getFeed,
+  getResetRequest,
+  getUserOrders,
+  getUsers,
+  saveUsers
+} from './mock-db';
 
-const URL = process.env.BURGER_API_URL;
+// Сервера нет: функции сохраняют прежние имена и форматы ответов,
+// но данные берут из src/data/ingredients.ts и localStorage (см. mock-db.ts).
 
-const checkResponse = <T>(res: Response): Promise<T> =>
-  res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
+const RESPONSE_DELAY_MS = 400;
+const TOKEN_PREFIX = 'mock.';
+
+// отвечает с задержкой, как настоящий сервер; ошибка в handler отклоняет промис
+const respond = <T>(handler: () => T): Promise<T> =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        resolve(handler());
+      } catch (err) {
+        reject(err);
+      }
+    }, RESPONSE_DELAY_MS);
+  });
 
 type TServerResponse<T> = {
   success: boolean;
 } & T;
 
-type TRefreshResponse = TServerResponse<{
-  refreshToken: string;
-  accessToken: string;
-}>;
+const toUser = ({ email, name }: TStoredUser): TUser => ({ email, name });
 
-export const refreshToken = (): Promise<TRefreshResponse> =>
-  fetch(`${URL}/auth/token`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify({
-      token: localStorage.getItem('refreshToken')
-    })
-  })
-    .then((res) => checkResponse<TRefreshResponse>(res))
-    .then((refreshData) => {
-      if (!refreshData.success) {
-        return Promise.reject(refreshData);
-      }
-      localStorage.setItem('refreshToken', refreshData.refreshToken);
-      setCookie('accessToken', refreshData.accessToken);
-      return refreshData;
-    });
-
-export const fetchWithRefresh = async <T>(
-  url: RequestInfo,
-  options: RequestInit
-) => {
-  try {
-    const res = await fetch(url, options);
-    return await checkResponse<T>(res);
-  } catch (err) {
-    if ((err as { message: string }).message === 'jwt expired') {
-      const refreshData = await refreshToken();
-      if (options.headers) {
-        (options.headers as { [key: string]: string }).authorization =
-          refreshData.accessToken;
-      }
-      const res = await fetch(url, options);
-      return await checkResponse<T>(res);
-    } else {
-      return Promise.reject(err);
-    }
-  }
+const findCurrentUser = (): TStoredUser | undefined => {
+  const token = getCookie('accessToken') ?? '';
+  return token.startsWith(TOKEN_PREFIX)
+    ? getUsers().find((item) => item.id === token.slice(TOKEN_PREFIX.length))
+    : undefined;
 };
 
-type TIngredientsResponse = TServerResponse<{
-  data: TIngredient[];
-}>;
+const getCurrentUser = (): TStoredUser => {
+  const user = findCurrentUser();
+  if (!user) throw new Error('Вы не авторизованы');
+  return user;
+};
+
+const normalizeEmail = (email: string) => email.trim().toLowerCase();
+
+export const getIngredientsApi = () =>
+  respond<TIngredient[]>(() => ingredients);
 
 type TFeedsResponse = TServerResponse<{
   orders: TOrder[];
@@ -67,58 +62,29 @@ type TFeedsResponse = TServerResponse<{
   totalToday: number;
 }>;
 
-type TOrdersResponse = TServerResponse<{
-  data: TOrder[];
-}>;
-
-export const getIngredientsApi = () =>
-  fetch(`${URL}/ingredients`)
-    .then((res) => checkResponse<TIngredientsResponse>(res))
-    .then((data) => {
-      if (data?.success) {
-        return data.data;
-      }
-      return Promise.reject(data);
-    });
-
 export const getFeedsApi = () =>
-  fetch(`${URL}/orders/all`)
-    .then((res) => checkResponse<TFeedsResponse>(res))
-    .then((data) => {
-      if (data?.success) return data;
-      return Promise.reject(data);
-    });
+  respond<TFeedsResponse>(() => ({ success: true, ...getFeed() }));
 
 export const getOrdersApi = () =>
-  fetchWithRefresh<TFeedsResponse>(`${URL}/orders`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-      authorization: getCookie('accessToken')
-    } as HeadersInit
-  }).then((data) => {
-    if (data?.success) return data.orders;
-    return Promise.reject(data);
-  });
+  respond<TOrder[]>(() => getUserOrders(getCurrentUser().id));
 
 type TNewOrderResponse = TServerResponse<{
   order: TOrder;
   name: string;
 }>;
 
-export const orderBurgerApi = (data: string[]) =>
-  fetchWithRefresh<TNewOrderResponse>(`${URL}/orders`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-      authorization: getCookie('accessToken')
-    } as HeadersInit,
-    body: JSON.stringify({
-      ingredients: data
-    })
-  }).then((data) => {
-    if (data?.success) return data;
-    return Promise.reject(data);
+export const orderBurgerApi = (data: TOrderRequest) =>
+  respond<TNewOrderResponse>(() => {
+    const user = getCurrentUser();
+    if (!data.items.length) throw new Error('Корзина пуста');
+    if (
+      data.delivery.type === 'delivery' &&
+      (!data.delivery.address || !data.delivery.phone)
+    ) {
+      throw new Error('Для доставки нужны адрес и телефон');
+    }
+    const order = addOrder(data, user.id);
+    return { success: true, order, name: order.name };
   });
 
 type TOrderResponse = TServerResponse<{
@@ -126,12 +92,11 @@ type TOrderResponse = TServerResponse<{
 }>;
 
 export const getOrderByNumberApi = (number: number) =>
-  fetch(`${URL}/orders/${number}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then((res) => checkResponse<TOrderResponse>(res));
+  respond<TOrderResponse>(() => {
+    const order = findOrder(number, findCurrentUser()?.id);
+    if (!order) throw new Error('Заказ не найден');
+    return { success: true, orders: [order] };
+  });
 
 export type TRegisterData = {
   email: string;
@@ -145,19 +110,33 @@ type TAuthResponse = TServerResponse<{
   user: TUser;
 }>;
 
+const toAuthResponse = (user: TStoredUser): TAuthResponse => ({
+  success: true,
+  accessToken: `${TOKEN_PREFIX}${user.id}`,
+  refreshToken: `${TOKEN_PREFIX}refresh.${user.id}`,
+  user: toUser(user)
+});
+
 export const registerUserApi = (data: TRegisterData) =>
-  fetch(`${URL}/auth/register`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify(data)
-  })
-    .then((res) => checkResponse<TAuthResponse>(res))
-    .then((data) => {
-      if (data?.success) return data;
-      return Promise.reject(data);
-    });
+  respond<TAuthResponse>(() => {
+    const email = normalizeEmail(data.email);
+    const name = data.name.trim();
+    if (!email || !name || !data.password) {
+      throw new Error('Заполните имя, e-mail и пароль');
+    }
+    const users = getUsers();
+    if (users.some((item) => item.email === email)) {
+      throw new Error('Пользователь с таким e-mail уже существует');
+    }
+    const user: TStoredUser = {
+      id: `${Date.now()}`,
+      email,
+      name,
+      password: data.password
+    };
+    saveUsers([...users, user]);
+    return toAuthResponse(user);
+  });
 
 export type TLoginData = {
   email: string;
@@ -165,73 +144,79 @@ export type TLoginData = {
 };
 
 export const loginUserApi = (data: TLoginData) =>
-  fetch(`${URL}/auth/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify(data)
-  })
-    .then((res) => checkResponse<TAuthResponse>(res))
-    .then((data) => {
-      if (data?.success) return data;
-      return Promise.reject(data);
-    });
+  respond<TAuthResponse>(() => {
+    const email = normalizeEmail(data.email);
+    const user = getUsers().find(
+      (item) => item.email === email && item.password === data.password
+    );
+    if (!user) throw new Error('Неверный e-mail или пароль');
+    return toAuthResponse(user);
+  });
 
+type TForgotPasswordResponse = TServerResponse<{ code: string }>;
+
+// письма отправлять некому, поэтому код сброса возвращается в ответе
 export const forgotPasswordApi = (data: { email: string }) =>
-  fetch(`${URL}/password-reset`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify(data)
-  })
-    .then((res) => checkResponse<TServerResponse<{}>>(res))
-    .then((data) => {
-      if (data?.success) return data;
-      return Promise.reject(data);
-    });
+  respond<TForgotPasswordResponse>(() => {
+    const email = normalizeEmail(data.email);
+    if (!getUsers().some((item) => item.email === email)) {
+      throw new Error('Пользователь с таким e-mail не найден');
+    }
+    return { success: true, code: createResetCode(email) };
+  });
 
 export const resetPasswordApi = (data: { password: string; token: string }) =>
-  fetch(`${URL}/password-reset/reset`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify(data)
-  })
-    .then((res) => checkResponse<TServerResponse<{}>>(res))
-    .then((data) => {
-      if (data?.success) return data;
-      return Promise.reject(data);
-    });
+  respond<TServerResponse<{}>>(() => {
+    const request = getResetRequest();
+    if (!request || request.code !== data.token.trim()) {
+      throw new Error('Неверный код');
+    }
+    if (!data.password) throw new Error('Введите новый пароль');
+    saveUsers(
+      getUsers().map((item) =>
+        item.email === request.email
+          ? { ...item, password: data.password }
+          : item
+      )
+    );
+    clearResetRequest();
+    return { success: true };
+  });
 
 type TUserResponse = TServerResponse<{ user: TUser }>;
 
 export const getUserApi = () =>
-  fetchWithRefresh<TUserResponse>(`${URL}/auth/user`, {
-    headers: {
-      authorization: getCookie('accessToken')
-    } as HeadersInit
-  });
+  respond<TUserResponse>(() => ({
+    success: true,
+    user: toUser(getCurrentUser())
+  }));
 
 export const updateUserApi = (user: Partial<TRegisterData>) =>
-  fetchWithRefresh<TUserResponse>(`${URL}/auth/user`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-      authorization: getCookie('accessToken')
-    } as HeadersInit,
-    body: JSON.stringify(user)
+  respond<TUserResponse>(() => {
+    const current = getCurrentUser();
+    const users = getUsers();
+    const email = user.email ? normalizeEmail(user.email) : current.email;
+    if (users.some((item) => item.email === email && item.id !== current.id)) {
+      throw new Error('Пользователь с таким e-mail уже существует');
+    }
+    const updated: TStoredUser = {
+      ...current,
+      email,
+      name: user.name?.trim() || current.name,
+      password: user.password || current.password
+    };
+    saveUsers(users.map((item) => (item.id === current.id ? updated : item)));
+    return { success: true, user: toUser(updated) };
   });
 
 export const logoutApi = () =>
-  fetch(`${URL}/auth/logout`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify({
-      token: localStorage.getItem('refreshToken')
-    })
-  }).then((res) => checkResponse<TServerResponse<{}>>(res));
+  respond<TServerResponse<{}>>(() => ({ success: true }));
+
+// сохраняет сессию так же, как это делалось с настоящим сервером
+export const saveTokens = (data: {
+  accessToken: string;
+  refreshToken: string;
+}) => {
+  setCookie('accessToken', data.accessToken);
+  localStorage.setItem('refreshToken', data.refreshToken);
+};

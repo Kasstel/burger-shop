@@ -12,6 +12,7 @@ describe('rootReducer', () => {
     expect(state).toHaveProperty('ingredients');
     expect(state).toHaveProperty('orders');
     expect(state).toHaveProperty('user');
+    expect(state).toHaveProperty('cart');
 
     expect(state.burgerConstructor).toEqual(
       burgerConstructorReducer(undefined, { type: '@@INIT' })
